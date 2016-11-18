@@ -16,7 +16,7 @@ When you are finished with the assignment, push your git repository to GitHub so
 
 
 ## Introduction ##
-The focus of this text is to document my journey and iterative coding of "run_analysis.R" .  This script is intended to collect, work with, and clean a data set to meet the 3 tidy requirements (i. Each variable forms a column. ii. Each observation forms a row. iii. Each type of obervational unit forms a table. Hadley Wickham).   For documentation on data and transformations use this link [Codebook](https://github.com/KonecnyA/GACD-Final-Project/blob/master/CodeBook.md)
+The focus of this text is to document my journey and iterative coding with the objective of recreating the four sample plots provided. For documentation on the load and transformed data please reference my [CodeBook](https://github.com/KonecnyA/ExData_Plotting1/blob/master/CodeBook.md) .
 
 ## Background ##
 - My Setup:
@@ -25,26 +25,34 @@ The focus of this text is to document my journey and iterative coding of "run_an
 	- RStudio Version 1.0.44
 
 ## Common to plot1.R, plot2.R, plot3.R & plot4.R ##
-### Step 1 Load the data correctly ###
-I attempted the first load of the text file into a data frame. I then did "dim()", "head()", "str()" and "summary()". Here is what I learned:
+## load_power.R##
+I decided to program this script to prepare the data for the four plots. I download the "household\_power\_consumption.zip" file as identified above. It indicates that the file is 19.7 MB. It is then unzipped into a data directory as "household\_power\_consumption.txt" .
 
-1. There was 2075259 rows (observations) and 9 columns (variables) - matched information in CodeBook.
-2. The variable names were in the first row ("headers = TRUE) - names matched information in the CodeBook.
-3. The semicolon ";" was being used as the separator ("sep = ";"")
-4. The first 8 variables being read in as Factor and the 9th variable as num
+On the first load and using "dim()", "head()", "str()" and "summary()" I learned that the separator was a semicolon ";" so would use "sep = ";".  I also learned that the variable names were in the first row so "headers = TRUE".
+I set the classes appropriately for the 9 variables.  The first two "Date" and "Time" are set to "character".  "Global\_active\_power", "Global\_reactive\_power", "Voltage", "Global\_intensity", "Sub\_metering\_1", "Sub\_metering_2" & "Sub\_metering\_3" are set to "numeric"
 
-I did a second load
+When the data frame "df\_household\_power\_consumption" is created, there are 2,075,259 rows (observations) and 9 columns (variables). This matches the information provided with the data set.
 
-### Step 2 Subset data for only dates 2007-02-01 and 2007-02-02 ###
-### Step 3 Convert Date / Time variables to Date / Time classes ###
+The next transformation to the data set is to only select data for the first two days in February for the year 2007. This results in 2,880 rows of 9 columns.
+
+The last transformation to the data prior to plotting is to convert the Date and Time. I learned using "strptime()" that it returns a POSIXlt variable which holds both date and time. I decided to use and leverage this for plotting overwriting what was in the original Time variable. I did try setting Date and Time separately and just commented them out.
+
+At this point in time there is a data frame ready to do the four plots that have been requested.
 
 ## plot1.R ##
+Set working directory and then through source("load_power.R") execute getting the data frame ready for plotting. Then setup the png device notably as per request width 480 pixels x height 480 pixels. It is a histogram plot relatively straightforward to setup except I had to use an x axis overide to show Global Active Power 0,2,4,6. Once the plot is complete, the device is closed and then the file "plot1.png" is compared to the sample to ensure has been done correctly.
+
 ## plot2.R ##
+Set working directory and then through source("load_power.R") execute getting the data frame ready for plotting. Then setup the png device notably as per request width 480 pixels x height 480 pixels. It is a line plot of Global Active Power vs. Date&Time. Once the plot is complete, the device is closed and then the file "plot2.png" is compared to the sample to ensure has been done correctly. 
+
 ## plot3.R ##
-## plot4.4 ##
+Set working directory and then through source("load_power.R") execute getting the data frame ready for plotting. Then setup the png device notably as per request width 480 pixels x height 480 pixels. It is a 3 line plot of each Sub\_metering vs. Date&Time. Lines are added to the initial plot and then a legend.  Once the plot is complete, the device is closed and then the file "plot3.png" is compared to the sample to ensure has been done correctly.
+
+## plot4.R ##
+Set working directory and then through source("load_power.R") execute getting the data frame ready for plotting. Then setup the png device notably as per request width 480 pixels x height 480 pixels. This is putting 4 plots on one page, 2 rows by 2 columns.  I set this using the "par()" function and tweak the margins to maximize plot space.  In the fourth plot I had to use the x and y coordinates to place the legend.  If I did not do this then it was not complete in the final plot.  Once the plot is complete, the device is closed and then the file "plot4.png" is compared to the sample to ensure has been done correctly.
 
 ## Closing Thoughts ##
-- P
+- None at this time
 
 ## Elements of a good README ##
 - Requirements
