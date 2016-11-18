@@ -1,7 +1,7 @@
 # CodeBook - Exploratory Data Analysis Project 1 #
 
 ## Introduction ##
-This markdown file is intended to  document source data, any transformations on the data and final data sets used by plot1.R, plot2.R, plot3.R and plot4.R. For documentation on my plot scripts use this link [README](https://github.com/KonecnyA/GACD-Final-Project/blob/master/README.md) .
+This markdown file is intended to  document source data, any transformations on the data and final data sets used by plot1.R, plot2.R, plot3.R and plot4.R. For documentation on my plot scripts use this link [README](https://github.com/KonecnyA/ExData_Plotting1/blob/master/README.md) .
 
 ## Source Information, Data, License & Citation ##
 
@@ -44,17 +44,18 @@ When loading the dataset into R, please consider the following:
 - You may find it useful to convert the Date and Time variables to Date/Time classes in R using the "strptime()"  and "as.Date()" functions.
 - Note that in this dataset missing values are coded as ?.
 
-## Structure of Data##
-There is a set of test files (subject, X and y) and train files (subject, X and y).  I am assuming that when loaded they are in the correct order to merge. The subject file has a subject\_id(int) for every single row (observation). The y file has an activity(Factor) for every single row (observation).  The X file has all the feature measurements (561 num) for every single row (observation).  When the columns are merged together then the result has subject\_id, activity and 561 feature measurements.
+## load_power.R##
+I decided to program this script to prepare the data for the four plots. I download the "household\_power\_consumption.zip" file as identified above. It indicates that the file is 19.7 MB. It is then unzipped into a data directory as "household\_power\_consumption.txt" .
 
-## Details about the data ##
+I set the classes appropriately for the 9 variables.  The first two "Date" and "Time" are set to "character".  "Global\_active\_power", "Global\_reactive\_power", "Voltage", "Global\_intensity", "Sub\_metering\_1", "Sub\_metering_2" & "Sub\_metering\_3" are set to "numeric"
 
+When the data frame "df\_household\_power\_consumption" is created, there are 2,075,259 rows (observations) and 9 columns (variables). This matches the information provided with the data set.
 
-## Study description ##
-## Sample information ##
-## Technical file information ##
-## Structure of the data ##
-## Details about the data ##
+The next transformation to the data set is to only select data for the first two days in February for the year 2007. This results in 2,880 rows of 9 columns.
+
+The last transformation to the data prior to plotting is to convert the Date and Time. I learned using "strptime()" that it returns a POSIXlt variable which holds both date and time. I decided to use and leverage this for plotting overwriting what was in the original Time variable. I did try setting Date and Time separately and just commented them out.
+
+At this point in time there is a data frame ready to do the four plots that have been requested.
 
 ## Elements of a good CodeBook ##
 - Study description
@@ -74,15 +75,11 @@ There is a set of test files (subject, X and y) and train files (subject, X and 
 	- Columns in which specific variables can be found
 	- Character or numeric?
 	- If numeric, what format?
+	- Summaries calculated?
+	- Transformations or work performed?
 - Text of questions and responses
 
 [Reference](http://dss.princeton.edu/online_help/analysis/codebook.htm)
-
-- Modify and Update available code books with the data
-- Indicate all variables and summaries calculated, along with units
-- Describe the variables, the data, and any transformations or work performed to clean data
-- Add any other relevant information
-
 
 "The CodeBook is about the data, the README is about the code and the .R file scripts my learning adventure."
 
